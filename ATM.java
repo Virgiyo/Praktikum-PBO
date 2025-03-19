@@ -55,10 +55,16 @@ class AkunATM {
         DecimalFormat formatRupiah = new DecimalFormat("###,###"); // Membuat format angka dengan pemisah ribuan
         System.out.println("Penyetoran berhasil: Rp" + formatRupiah.format(jumlah)); // Menampilkan informasi penyetoran
     }
+
+    // Method untuk menghapus akun ATM
+    public void hapusAkun() {
+        this.nomorRekening = null; // Menghapus nomor rekening
+        this.saldo = 0; // Mengatur saldo menjadi 0
+    }
 }
 
-public class ATM { // Mendeklarasikan kelas ATM sebagai kelas utama
-    public static void main(String[] args) { // Menyatakan metode main sebagai titik awal eksekusi program
+public class ATM {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Membuat objek scanner untuk membaca input dari pengguna
         AkunATM akun = null; // Mendeklarasikan variabel akun dengan nilai null, untuk menyimpan objek
                              // AkunATM
@@ -66,14 +72,15 @@ public class ATM { // Mendeklarasikan kelas ATM sebagai kelas utama
                                 // berjalan
 
         while (running) { // Perulangan untuk menampilkan menu hingga pengguna memilih keluar
-            System.out.println("\n"); // memberikan space
+            System.out.println("\n"); // Memberikan space
             System.out.println("\nMenu ATM:");
             System.out.println("1. Buat Akun ATM");
             System.out.println("2. Cek Saldo ATM");
             System.out.println("3. Tarik Tunai");
             System.out.println("4. Setor Tunai");
-            System.out.println("5. Keluar");
-            System.out.print("Pilih menu (1-5): ");
+            System.out.println("5. Hapus Akun ATM");
+            System.out.println("6. Keluar");
+            System.out.print("Pilih menu (1-6): ");
             int pilihan = scanner.nextInt();
             scanner.nextLine(); // Membersihkan buffer setelah pembacaan input integer
 
@@ -138,6 +145,16 @@ public class ATM { // Mendeklarasikan kelas ATM sebagai kelas utama
                     break;
 
                 case 5:
+                    // Hapus akun ATM
+                    if (akun == null) {
+                        System.out.println("Akun belum dibuat. Pilih menu 1 terlebih dahulu.");
+                    } else {
+                        akun.hapusAkun();
+                        System.out.println("Akun ATM berhasil dihapus.");
+                    }
+                    break;
+
+                case 6:
                     // Keluar
                     running = false;
                     System.out.println("Terima kasih.");
